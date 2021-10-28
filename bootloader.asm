@@ -8,6 +8,14 @@
 mov sp, 0x9000
 mov bp, sp
 
+mov ah, 0x00  ; Set graphics mode
+mov al, 0x13  ; Graphics mode
+int 0x10
+
+mov ah, 0x05  ; Set visible page
+mov al, 0     ; Page
+int 0x10
+
 call draw_colors
 
 jmp $
@@ -20,14 +28,6 @@ draw_colors:
 	push bx
 	push cx
 	push dx
-
-	mov ah, 0x00  ; Set graphics mode
-	mov al, 0x13  ; Graphics mode
-	int 0x10
-
-	mov ah, 0x05  ; Set visible page
-	mov al, 0     ; Page
-	int 0x10
 
 	mov ah, 0x0C  ; Draw pixel
 	mov bh, 0     ; Page
